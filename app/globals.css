@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #ffffff;
+  --color-slate-surface: #f9fafb;
+  --color-cyan: #b5e03e;
+  --color-primary: #111111;
+  --color-amber: #F5B61A;
+  --font-display: "Montserrat", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 font-sans antialiased selection:bg-cyan/30 selection:text-black overflow-x-hidden scroll-smooth;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-gray-900;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-gray-50 border border-gray-200 rounded-[32px] shadow-sm;
+  }
+  .glass-card {
+    @apply bg-white border border-gray-200 rounded-[32px] shadow-sm;
+  }
+  .mesh-bg {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .glow-text {
+    text-shadow: 0 0 20px rgba(181, 224, 62, 0.5);
+  }
+  .glow-border {
+    box-shadow: 0 0 15px rgba(181, 224, 62, 0.2);
+  }
+}
+
