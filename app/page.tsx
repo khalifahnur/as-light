@@ -1,18 +1,21 @@
-import { Benefits } from "@/components/sections/Benefits";
-import { Contact } from "@/components/sections/Contact";
-import { Hero } from "@/components/sections/Hero";
-import { Projects } from "@/components/sections/Projects";
-import { Solutions } from "@/components/sections/Solutions";
+import { Categories } from "@/components/home/Categories";
+import { CtaBand } from "@/components/home/CtaBand";
+import { Hero } from "@/components/home/Hero";
+import { Process } from "@/components/home/Process";
+import { SavingsCalculator } from "@/components/home/SavingsCalculator";
+import { ServicesPreview } from "@/components/home/ServicesPreview";
+import { WhyUs } from "@/components/home/WhyUs";
 
-
-export default function page() {
+export default function Home() {
   return (
-    <div className="flex flex-col gap-6 w-full">
+    <>
       <Hero />
-      <Solutions />
-      <Benefits />
-      <Projects />
-      <Contact />
-    </div>
+      <Categories />
+      <SavingsCalculator />
+      <WhyUs />
+      <ServicesPreview />
+      <Process />
+      <CtaBand />
+    </>
   );
 }

@@ -1,46 +1,75 @@
-import { Contact } from "@/components/sections/Contact";
+import { Eye, Handshake, Lightbulb, Target } from "lucide-react";
+import type { Metadata } from "next";
+import { CtaBand } from "@/components/home/CtaBand";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
+import { sectors, site } from "@/lib/site";
 
+export const metadata: Metadata = {
+  title: "About us",
+  description: `Learn about ${site.name} ${site.descriptor} — our story, values and commitment to quality electrical and lighting solutions in Kenya.`,
+};
 
-export default function page() {
+const values = [
+  { icon: Target, title: "Mission", text: "To make safe, efficient and reliable power and lighting accessible to every home and business in Kenya." },
+  { icon: Eye, title: "Vision", text: "To be the most trusted name in electrical and lighting supply — known for honest advice and lasting quality." },
+  { icon: Handshake, title: "Integrity", text: "We recommend what you need, not what earns us most, and we stand behind everything we sell." },
+  { icon: Lightbulb, title: "Efficiency", text: "Every recommendation is weighed against the long-term energy and cost savings it delivers." },
+];
+
+export default function AboutPage() {
   return (
-    <div className="flex flex-col gap-6 w-full">
-      <Reveal>
-        <div className="glass-card flex flex-col md:flex-row items-stretch text-center md:text-left relative overflow-hidden h-[400px]">
-          <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center items-center md:items-start z-10 bg-white/90 backdrop-blur-sm">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">Pioneering Urban Infrastructure</h1>
-            <p className="text-lg text-gray-600 max-w-lg">
-              We are a technology company dedicated to transforming how cities manage their most ubiquitous asset: street lighting.
-              Our mission is to provide open, scalable, and secure IoT solutions that bridge the gap between legacy infrastructure and smart city futures.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2 relative min-h-[300px]">
-             <img src="https://images.unsplash.com/photo-1542384701-c0e46e0eda04?q=80&w=2065&auto=format&fit=crop" alt="Smart City Infrastructure" className="absolute inset-0 w-full h-full object-cover" />
-             <div className="absolute inset-0 bg-gray-900/10"></div>
-          </div>
+    <>
+      <PageHeader eyebrow="About us" title={<>Why we are called <span className="text-gradient">Mwangaza.</span></>}>
+        In Swahili, <em>mwangaza</em> means light and brightness — the simple promise behind
+        everything we do.
+      </PageHeader>
+
+      <section className="container-x py-16 md:py-24">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <Reveal>
+            <h2 className="text-3xl font-bold sm:text-4xl">Power and lighting, made dependable.</h2>
+            <div className="mt-5 space-y-4 text-lg leading-relaxed text-navy/70">
+              <p>
+                {site.name} {site.descriptor} supplies and installs electrical, lighting and solar
+                solutions for homes, businesses, institutions and industry across Kenya.
+              </p>
+              <p>
+                We combine a broad product range with practical technical advice, so you get the
+                right solution the first time — safe, efficient and built to last.
+              </p>
+              {/* TODO: add company history, founding year, licences & accreditations here */}
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="rounded-3xl bg-navy p-8 text-white sm:p-10">
+              <h3 className="font-display text-xl font-semibold text-amber">Who we serve</h3>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {sectors.map((s) => (
+                  <li key={s} className="flex items-center gap-3 text-white/85">
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber" /> {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </div>
-      </Reveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-         <Reveal delay={0.1} className="glass-card p-10 bg-gray-900 text-white">
-            <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
-            <p className="text-gray-400 leading-relaxed">
-              We envision a world where urban lighting does more than just illuminate. It senses, communicates, and adapts. 
-              By turning every streetlamp into a smart node, we unlock possibilities for environmental monitoring, traffic optimization, and unprecedented energy efficiency.
-            </p>
-         </Reveal>
-         
-         <Reveal delay={0.2} className="glass-card p-10">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Open Standards</h2>
-            <p className="text-gray-600 leading-relaxed">
-              We reject vendor lock-in. Our hardware adheres to strict global standards like Zhaga and NEMA, and our software communicates via open APIs. 
-              We believe municipalities should retain full control and flexibility over their infrastructure investments.
-            </p>
-         </Reveal>
-      </div>
-
-      {/* Render the Contact section here as the call to action */}
-      <Contact />
-    </div>
+        <div className="mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {values.map((v, i) => (
+            <Reveal key={v.title} delay={i * 0.07}>
+              <div className="h-full rounded-3xl border border-line bg-white p-7">
+                <span className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-amber-soft text-amber-deep">
+                  <v.icon size={22} />
+                </span>
+                <h3 className="text-lg font-semibold">{v.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-navy/60">{v.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+      <CtaBand />
+    </>
   );
 }
