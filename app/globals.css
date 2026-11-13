@@ -1,45 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-navy: #ffffff;
-  --color-slate-surface: #f9fafb;
-  --color-cyan: #b5e03e;
-  --color-primary: #111111;
-  --color-amber: #F5B61A;
-  --font-display: "Montserrat", sans-serif;
-  --font-sans: "Inter", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+@theme inline {
+  --color-ink: #070c1a;
+  --color-navy: #0e1730;
+  --color-navy-2: #16234a;
+  --color-amber: #ffb400;
+  --color-amber-deep: #e59a00;
+  --color-amber-soft: #fff3d1;
+  --color-cream: #faf8f3;
+  --color-mist: #eef1f7;
+  --color-line: #e4e7ef;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
-  body {
-    @apply bg-white text-gray-900 font-sans antialiased selection:bg-cyan/30 selection:text-black overflow-x-hidden scroll-smooth;
-  }
   html {
-    @apply scroll-smooth;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-gray-900;
+  body {
+    @apply bg-cream font-sans text-navy antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--color-amber);
+    color: var(--color-ink);
   }
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-gray-50 border border-gray-200 rounded-[32px] shadow-sm;
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
   }
-  .glass-card {
-    @apply bg-white border border-gray-200 rounded-[32px] shadow-sm;
+  .grid-dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+    background-size: 26px 26px;
   }
-  .mesh-bg {
-    background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-    background-size: 24px 24px;
+  .grid-dots-dark {
+    background-image: radial-gradient(rgba(14, 23, 48, 0.07) 1px, transparent 1px);
+    background-size: 26px 26px;
   }
-  .glow-text {
-    text-shadow: 0 0 20px rgba(181, 224, 62, 0.5);
-  }
-  .glow-border {
-    box-shadow: 0 0 15px rgba(181, 224, 62, 0.2);
+  .text-gradient {
+    background: linear-gradient(100deg, #ffd166 0%, #ffb400 45%, #ff8a00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }
 
+@keyframes flicker-glow {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-glow {
+  animation: flicker-glow 4s ease-in-out infinite;
+}
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-glow,
+  .animate-float,
+  .animate-marquee {
+    animation: none;
+  }
+}
